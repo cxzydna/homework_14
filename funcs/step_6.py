@@ -2,14 +2,14 @@ import sqlite3
 import json
 
 
-def get_movies(type_of_movie, title, genre):
+def get_movies(type_of_movie, year, genre):
     con = sqlite3.connect("../netflix.db")
     cur = con.cursor()
     query = f"""
     SELECT `title`, `description`
     FROM `netflix`
     WHERE `type` = '{type_of_movie}'
-    AND `title` = '{title}'
+    AND `release_year` = '{year}'
     AND `listed_in` LIKE '%{genre}%'
     """
     cur.execute(query)
@@ -34,6 +34,6 @@ def movie_to_json(data):
     return 'Данные загружены'
 
 
-movies = get_movies('Movie', '21', 'dramas')
+movies = get_movies('Movie', '1990', 'dramas')
 movie_dict = movie_to_dict(movies)
 print(movie_to_json(movie_dict))
