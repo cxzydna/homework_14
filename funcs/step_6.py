@@ -8,7 +8,7 @@ def get_movies(type_of_movie, year, genre):
     query = f"""
     SELECT `title`, `description`
     FROM `netflix`
-    WHERE `type` = '{type_of_movie}'
+    WHERE `type` = '{type_of_movie.title()}'
     AND `release_year` = '{year}'
     AND `listed_in` LIKE '%{genre}%'
     """
@@ -34,6 +34,6 @@ def movie_to_json(data):
     return 'Данные загружены'
 
 
-movies = get_movies('Movie', '1990', 'dramas')
+movies = get_movies('movie', '1990', 'dramas')
 movie_dict = movie_to_dict(movies)
 print(movie_to_json(movie_dict))
